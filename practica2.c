@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-lower(char l){
+int lower(char l){
 	char *p;
 	p = &l;
 	*p >= 'A' && *p <= 'Z' ? *p+=32: printf("");
@@ -9,7 +9,7 @@ lower(char l){
 strcat(char destino[],char su[], char sd[]){
 	char *pu=su,*pd=sd;
 	int i,id;
-	
+
 	for (i=0;su[i]!='\0';i++){
 		destino[i]=*pu;
 		pu++;
@@ -44,7 +44,7 @@ strcopyn (char s1[],char s2[], int n){
 strcatn(char destino[],char su[], char sd[],int n){
 	char *pu=su,*pd=sd;
 	int i,id;
-	
+
 	for (i=0;su[i]!='\0'&&i<n;i++){
 		destino[i]=*pu;
 		pu++;
@@ -81,9 +81,9 @@ invertir(char s[]){
 		*p1 = *p2;
 		*p2 = temp;
 	}
-	
+
 }
-	
+
 
 main(){
 	char palabra[15]="",s[10]="",palabra2[15]="", inv[7]="palabra";
