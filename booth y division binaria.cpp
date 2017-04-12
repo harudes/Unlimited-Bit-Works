@@ -6,8 +6,9 @@ using namespace std;
 
 int to_int(bitset<8> a){
 	int n=0;
-	for(int i=0;i<8;i++)
+	for(int i=0;i<a.size()-1;i++)
 		n+=pow(2,i)*a[i];
+	n-=pow(2,a.size()-1)*a[7];
 	return n;
 }
 
@@ -53,32 +54,31 @@ int booth(int a, int b){
 
 int division(int a, int b){
 	bitset<8> Q(a),M(b),A(0), temp(0);
-	int n=Q.count();
+	int n=Q.size();
 	while(n>0){
 		A=A<<1;
 		A[0]=Q[7];
-		//cout<<"A antes de la suma: "<<A<<endl;
 		Q=Q<<1;
-		//cout<<"Q: "<<Q<<endl;
 		A=sumaBit(A,complementoBit(M));
-		temp=A;
-		//cout<<"A luego de la suma: "<<A<<endl;
-		if(A[Q.count()]==1){
+		if(A[Q.size()-1]==1){
 			Q[0]=0;
-			A=temp;
+			A=sumaBit(A,M);
 		}
 		else
 		   Q[0]=1;
 		n--;
-		//cout<<"A al terminar: "<<A<<endl;
 	}
 	cout<<"Binario: "<<Q<<endl;
+	cout<<"El resto es: "<<to_int(A)<<endl;
 	return to_int(Q);
 }
 int main()
 {
-	cout<<division(12,3)<<endl;
-	cout<<booth(11,5);
+	cout<<division(115,3)<<endl;
+	cout<<division(75,5)<<endl;
+	cout<<booth(-11,5)<<endl;
+	cout<<booth(10,-4)<<endl;
+	cout<<booth(15,3)<<endl;
 	return 0;
 }
 
