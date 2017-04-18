@@ -20,22 +20,20 @@ void print(int *p,int *q){
 }
 
 void Bubblesort(int *p, int *q){
-	int tam=q-p+1;
 	int *temp=p;
 	bool intercambio=1;
 	int j=0;
-	while(intercambio==1&&tam>1){
+	while(intercambio==1&&q!=p+1){
 		intercambio==0;
-		for(int i=0;i<tam-1;i++){
+		for(;p<q;p++){
 			if(*p>*(p+1)){
 				swap(p,p+1);
 				intercambio=1;
 				j++;
 			}
-			p++;
 		}
 		p=temp;
-		tam--;
+		q--;
 	}
 	cout<<j<<endl;
 }
