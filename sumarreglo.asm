@@ -4,7 +4,7 @@ __start:
 	la $t0,array # $t0 apuntara a los elementos
 	lw $t1,count # sale del bucle cuando $t1 es 0
 	lw $t2,suma # inicializa min ($t2)
-	la $a0,ans1 # cuando termina el bucle imprime respuestas
+	la $a0,ans1
 	li $v0,4
 	syscall # imprime "Ingrese un numero: "
 	li $v0,5
@@ -12,13 +12,13 @@ __start:
 	add $t1, $t1,$v0
 	la $a0,ans2 # cuando termina el bucle imprime respuestas
 	li $v0,4
-	syscall # imprime "La suma es: "
+	syscall # imprime "La suma de los "
 	move $a0,$t1
 	li $v0,1
-	syscall # Imprime la suma
+	syscall # Imprime la cantidad de numeros sumados
 	la $a0,ans3 # cuando termina el bucle imprime respuestas
 	li $v0,4
-	syscall # imprime "La suma es: "
+	syscall # imprime " primeros numeros es: "
 	la $a0,endl # imprime un salto de linea
 		li $v0,4
 		syscall
