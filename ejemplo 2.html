@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Hola</title>
+		<style type="text/css">
+body {
+	background-color: lightblue;
+}
+th {
+	background-color: black;
+	color: white;
+}
+		</style>
+		<script type="text/javascript">
+function agregar() {
+	var nom=document.getElementById("nombre");
+	var ape=document.getElementById("apellido");
+	var row = document.createElement("tr");
+	var tbody = document.getElementById("contenido");
+	row.innerHTML = "<tr><td style='background-color: purple ! important;'>" + (tbody.children.length+1) + "</td><td>" 		   + nom.value + "</td><td>" + ape.value + "</td></tr>";
+	tbody.appendChild(row);
+}
+	</script>
+	</head>
+	<body>
+	<div>
+		<div>
+			<span>Nombre:</span>
+			<input type="text" id="nombre" value="Luis">
+		</div>
+		<div>
+			<span>Apellido:</span>
+			<input type="text" id="apellido">
+		</div>
+		<button onclick="agregar()">Guardar</button>
+	</div>
+		<table border>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<tbody id="contenido">
+			<tr>
+				<td>1</td>
+				<td>Juan</td>
+				<td>Perez</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Lelouch</td>
+				<td>Vi Britania</td>
+			</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
