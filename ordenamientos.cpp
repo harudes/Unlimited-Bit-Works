@@ -19,11 +19,48 @@ void print(int *p,int *q){
 	cout<<"]"<<endl;
 }
 
-void Bubblesort(int *p, int *q){
+void sort(int *p,int *q,int *pivote){
+	int *start=p, *end=q;
+	int temp;
+	for(int *i=p; i<pivote;){
+		if(*i>*pivote){
+			int *aux=i;
+			temp=*aux;
+			for(;aux<pivote;aux++)
+				swap(aux,aux+1);
+			*(aux)=temp;
+			pivote--;
+		}
+		else
+		   i++;
+	}
+	print(start,end);
+	cout<<endl;
+	for(int *i=q; i>pivote;){
+		if(*i<*pivote){
+			int *aux=i;
+			temp=*aux;
+			for(;aux>pivote;aux--)
+				swap(aux,aux-1);
+			*(aux)=temp;
+			pivote++;
+		}
+		else
+		   i--;
+		print(start,end);
+		cout<<endl;
+	}
+}
+
+void QuickSort(*p,*q){
+	
+}
+
+void BubbleSort(int *p, int *q){
 	int *temp=p;
 	bool intercambio=1;
 	while(intercambio==1&&q!=p+1){
-		intercambio==0;
+		intercambio=0;
 		for(;p<q;p++){
 			if(*p>*(p+1)){
 				swap(p,p+1);
@@ -33,15 +70,40 @@ void Bubblesort(int *p, int *q){
 		p=temp;
 		q--;
 	}
-	cout<<j<<endl;
+}
+
+void CoctailSort(int *p, int *q){
+	int *temp=p;
+	bool intercambio=1;
+	while(intercambio==1&&q>p){
+		intercambio=0;
+		for(;p<q;p++){
+			if(*p>*(p+1)){
+				swap(p,p+1);
+				intercambio=1;
+			}
+		}
+		for(;q>temp;q--){
+			if(*q<*(q-1)){
+				swap(q,q-1);
+				intercambio=1;
+			}
+		}
+		temp=q;
+		q=p;
+		temp++;
+		p=temp;
+		q--;
+	}
 }
 
 int main(int argc, char *argv[]) {
-	int arreglo[20]={7,2,5,4,1,3,5,1,4,2,4,2,5,1,54,1,4,1,14,4};
+	int arreglo[20]={20,7,18,7,5,15,10,13,12,11,10,9,8,7,6,5,4,3,2,1};
 	int *p=arreglo, *q=&arreglo[19];
 	print(p,q);
-	Bubblesort(p,q);
+	sort(p,q,&arreglo[8]);
 	print(p,q);
 	return 0;
 }
+
 
