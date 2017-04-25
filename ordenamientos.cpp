@@ -34,8 +34,6 @@ void sort(int *p,int *q,int *pivote){
 		else
 		   i++;
 	}
-	print(start,end);
-	cout<<endl;
 	for(int *i=q; i>pivote;){
 		if(*i<*pivote){
 			int *aux=i;
@@ -47,15 +45,18 @@ void sort(int *p,int *q,int *pivote){
 		}
 		else
 		   i--;
-		print(start,end);
-		cout<<endl;
 	}
 }
 
-void QuickSort(*p,*q){
-	
+void QuickSort(int *p,int *q){
+	int *pivote=p,*start=p,*end=q;
+	pivote+=(q-p)/2;
+	sort(p,q,pivote);
+	if(p<=q){
+		QuickSort(start,pivote-1);
+		QuickSort(pivote+1,end);
+	}
 }
-
 void BubbleSort(int *p, int *q){
 	int *temp=p;
 	bool intercambio=1;
@@ -101,7 +102,7 @@ int main(int argc, char *argv[]) {
 	int arreglo[20]={20,7,18,7,5,15,10,13,12,11,10,9,8,7,6,5,4,3,2,1};
 	int *p=arreglo, *q=&arreglo[19];
 	print(p,q);
-	sort(p,q,&arreglo[8]);
+	QuickSort(p,q);
 	print(p,q);
 	return 0;
 }
