@@ -9,6 +9,32 @@ void swap(int *a, int *b){
 	*b=temp;
 }
 
+bool menor(int *a, int *b){
+	return *a>*b;
+}
+
+bool abs_menor(int *a, int *b){
+	int a_temp=*a, b_temp=*b;
+	if(a_temp<0)
+		a_temp=-a_temp;
+	if(b_temp<0)
+		b_temp=-b_temp;
+	return a_temp>b_temp;
+}
+
+bool mayor(int *a, int *b){
+	return *a<*b;
+}
+
+bool abs_mayor(int *a, int *b){
+	int a_temp=*a, b_temp=*b;
+	if(a_temp<0)
+		a_temp=-a_temp;
+	if(b_temp<0)
+		b_temp=-b_temp;
+	return a_temp<b_temp;
+}
+
 void print(int *p,int *q){
 	int tam=q-p+1;
 	cout<<"[";
@@ -24,13 +50,13 @@ void print(int *p,int *q){
 
 
 
-void BubbleSort(int *p, int *q){
+void BubbleSort(int *p, int *q,bool (*comparar)(int *a, int *b)){
 	int *temp=p;
 	bool intercambio=1;
 	while(intercambio==1&&q!=p+1){
 		intercambio=0;
 		for(;p<q;p++){
-			if(*p>*(p+1)){
+			if(comparar(p,p+1)){
 				swap(p,p+1);
 				intercambio=1;
 			}
@@ -40,20 +66,20 @@ void BubbleSort(int *p, int *q){
 	}
 }
 
-void CoctailSort(int *p, int *q){
+void CoctailSort(int *p, int *q, bool (*comparar)(int *a, int *b)){
 	int *temp=p;
 	bool intercambio=1;
 	while(intercambio==1&&q>p){
 		intercambio=0;
 		for(;p<q;p++){
-			if(*p>*(p+1)){
+			if(comparar(p,p+1)){
 				swap(p,p+1);
 				intercambio=1;
 			}
 		}
 		for(;q>temp;q--){
-			if(*q<*(q-1)){
-				swap(q,q-1);
+			if(comparar(q-1,q)){
+				swap(q-1,q);
 				intercambio=1;
 			}
 		}
@@ -65,10 +91,10 @@ void CoctailSort(int *p, int *q){
 	}
 }
 
-int* sort(int *p,int *q,int *pivote){
+int* sort(int *p,int *q,int *pivote, bool (*comparar)(int *a, int *b)){
 	int temp;
 	for(int *i=p; i<pivote;){
-		if(*i>=*pivote){
+		if(comparar(i,pivote)){
 			int *aux=i;
 			temp=*aux;
 			for(;aux<pivote;aux++)
@@ -80,7 +106,7 @@ int* sort(int *p,int *q,int *pivote){
 		   i++;
 	}
 	for(int *i=q; i>pivote;){
-		if(*i<=*pivote){
+		if(comparar(pivote,i)){
 			int *aux=i;
 			temp=*aux;
 			for(;aux>pivote;aux--)
@@ -94,27 +120,28 @@ int* sort(int *p,int *q,int *pivote){
 	return pivote;
 }
 
-void QuickSort(int *p,int *q){
+void QuickSort(int *p,int *q, bool (*comparar)(int *a, int *b)){
 	int *pivote=p;
 	pivote+=(q-p)/2;
-	pivote=sort(p,q,pivote);
+	pivote=sort(p,q,pivote,comparar);
 	if(p<pivote)
-		QuickSort(p,pivote-1);
+		QuickSort(p,pivote-1,comparar);
 	if(q>pivote)
-		QuickSort(pivote+1,q);
+		QuickSort(pivote+1,q,comparar);
 }
 
 void generarArreglo(int *p, int tam){
 	for(int i=0;i<tam;i++)
-		p[i]=rand()%20;
+		p[i]=rand()%40-20;
 }
 
 int main(int argc, char *argv[]) {
+	srand(time(NULL));
 	int arreglo[20];
 	int *p=arreglo, *q=&arreglo[19];
 	generarArreglo(arreglo,20);
 	print(p,q);
-	QuickSort(p,q);
+	QuickSort(p,q,menor);
 	print(p,q);
 	return 0;
 }
